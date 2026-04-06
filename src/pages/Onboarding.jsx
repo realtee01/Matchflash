@@ -14,5 +14,7 @@ const Onboarding = ({ onComplete }) => {
 
   return (
     <div className="h-screen flex flex-col items-center justify-center bg-slate-50 dark:bg-slate-900 px-6">
-      <h2 className="text-3xl font-bold dark:text-white mb-2">Welcome to MatchFlash</h2>
-      <p className="text-gray-500 mb-8 text-center">
+    <h2 className="text-3xl font-bold dark:text-white mb-2">Welcome to MatchFlash</h2>
+<p className="text-gray-500 mb-8 text-center">
+  Enter your name to personalize your live score experience.
+</p> 
