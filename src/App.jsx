@@ -6,21 +6,29 @@ import { UserProvider } from './context/UserContext';
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [showOnboarding, setShowOnboarding] = useState(true);
+  const [hasAccount, setHasAccount] = useState(false);
 
   useEffect(() => {
-    // 6-7 second bounce animation timer
-    const timer = setTimeout(() => setLoading(false), 6500);
+    // 6.5 second timer for the bouncing splash animation
+    const timer = setTimeout(() => {
+      setLoading(false);
+      // Check if user has already visited (optional)
+      const savedUser = localStorage.getItem('matchflash_user');
+      if (savedUser) setHasAccount(true);
+    }, 6500);
+
     return () => clearTimeout(timer);
   }, []);
 
-  if (loading) return <SplashScreen />;
+  if (loading) {
+    return <SplashScreen />;
+  }
 
   return (
     <UserProvider>
-      <div className="min-h-screen transition-colors duration-300 dark:bg-darkBg">
-        {showOnboarding ? (
-          <Onboarding onFinish={() => setShowOnboarding(false)} />
+      <div className="min-h-screen transition-colors duration-300">
+        {!hasAccount ? (
+          <Onboarding onComplete={() => setHasAccount(true)} />
         ) : (
           <Home />
         )}
